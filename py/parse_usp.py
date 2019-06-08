@@ -41,7 +41,7 @@ def main():
 
 	logger.info(" - Obtendo a lista de todas as unidades de ensino - ")
 
-	response = urllib.request.urlopen('https://uspdigital.usp.br/jupiterweb/jupColegiadoLista?tipo=T')
+	response = urllib.request.urlopen('https://uspdigital.usp.br/jupiterweb/jupColegiadoLista?tipo=T&print=true')
 	soup = BeautifulSoup(response.read(), "html5lib")
 
 	# Lista de tags do BeautifulSoup da forma [<a
@@ -127,7 +127,7 @@ async def iterar_unidades(codigos_unidades):
 
 async def iterar_unidade(codigo):
 	logger.debug(" -    Obtendo as materias da unidade %s - " % (codigo))
-	response = await session.get('https://uspdigital.usp.br/jupiterweb/jupDisciplinaLista?letra=A-Z&tipo=T&codcg=' + codigo, timeout = 120)
+	response = await session.get('https://uspdigital.usp.br/jupiterweb/jupDisciplinaLista?letra=A-Z&print=true&tipo=T&codcg=' + codigo, timeout = 120)
 	assert response.status == 200
 	soup = BeautifulSoup(await response.text(), "html5lib")
 	links_materias = soup.find_all('a', href=re.compile("obterTurma"))
