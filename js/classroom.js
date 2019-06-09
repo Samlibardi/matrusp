@@ -25,7 +25,7 @@ function Classroom(jsonObj, parentLecture) {
   this.parent = parentLecture;
   this.teachers = [];
   this.schedules = [];
-  this.vacancies = {total: {total: 0, subscribed: 0, pending: 0, enrolled: 0}};
+  this.vacancies = {total: {}};
   this.selected = true;
   if (jsonObj) {
     //Get info from json
@@ -43,31 +43,34 @@ function Classroom(jsonObj, parentLecture) {
     
     //Vacancy mapping
     for(vacancyType in jsonObj.vagas) {
-      vacancy = {
-        total: jsonObj.vagas[vacancyType].vagas,
-        subscribed: jsonObj.vagas[vacancyType].inscritos,
-        pending: jsonObj.vagas[vacancyType].pendentes,
-        enrolled: jsonObj.vagas[vacancyType].matriculados,
-        groups: {}
-      };
+      vacancy = {};
+      if (jsonObj.vagas[vacancyType].vagas !== undefined) vacancy['total'] = jsonObj.vagas[vacancyType].vagas;
+      if (jsonObj.vagas[vacancyType].inscritos !== undefined) vacancy['subscribed'] = jsonObj.vagas[vacancyType].inscritos;
+      if (jsonObj.vagas[vacancyType].pendentes !== undefined) vacancy['pending'] = jsonObj.vagas[vacancyType].pendentes;
+      if (jsonObj.vagas[vacancyType].matriculados !== undefined) vacancy['enrolled'] = jsonObj.vagas[vacancyType].matriculados;
+      vacancy.groups = {};
 
       for(vacancyGroup in jsonObj.vagas[vacancyType].grupos) {
         group = jsonObj.vagas[vacancyType].grupos[vacancyGroup];
-        vacancy.groups[vacancyGroup] = {
-          total: group.vagas,
-          subscribed: group.inscritos,
-          pending: group.pendentes,
-          enrolled: group.matriculados,
-          groups: {}
-        }
+        
+        vacancy.groups[vacancyGroup] = {};
+        if (group.vagas !== undefined) vacancy.groups[vacancyGroup]['total'] = group.vagas;
+        if (group.inscritos !== undefined) vacancy.groups[vacancyGroup]['subscribed'] = group.inscritos;
+        if (group.pendentes !== undefined) vacancy.groups[vacancyGroup]['pending'] = group.pendentes;
+        if (group.matriculados !== undefined) vacancy.groups[vacancyGroup]['enrolled'] = group.matriculados;
       }
 
       this.vacancies[vacancyType] = vacancy;
 
-      this.vacancies.total.total += vacancy.total;
-      this.vacancies.total.subscribed += vacancy.subscribed;
-      this.vacancies.total.pending += vacancy.pending;
-      this.vacancies.total.enrolled += vacancy.enrolled;
+      for(x in vacancy) {
+        if(this.vacancies.total[x] === undefined) this.vacancies.total[x] = 0;
+        this.vacancies.total[x] += vacancy[x];
+      }
+
+      //this.vacancies.total.total += vacancy.total;
+      //this.vacancies.total.subscribed += vacancy.subscribed;
+      //this.vacancies.total.pending += vacancy.pending;
+      //this.vacancies.total.enrolled += vacancy.enrolled;
     }
   }
 }

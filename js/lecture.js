@@ -24,8 +24,8 @@ function Lecture(jsonObj, parentPlan) {
   if (jsonObj) {
     this.code = jsonObj.codigo;
     this.name = jsonObj.nome;
-    this.lectureCredits = jsonObj.creditos_aula;
-    this.workCredits = jsonObj.creditos_trabalho;
+    this.lectureCredits = jsonObj.creditos_aula || 0;
+    this.workCredits = jsonObj.creditos_trabalho || 0;
     this.unit = jsonObj.unidade;
     this.department = jsonObj.departamento;
     this.campus = jsonObj.campus;

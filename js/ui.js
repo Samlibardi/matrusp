@@ -297,7 +297,7 @@ UI.prototype.createClassroomInfo = function(classroom) {
         {
           tag:'div',
           class: 'classroom-vacancies-summary',
-          innerHTML: `${classroom.vacancies.total.subscribed}/${classroom.vacancies.total.total}`
+          innerHTML: `${classroom.vacancies.total.subscribed !== undefined ? classroom.vacancies.total.subscribed + '/' : ''}${classroom.vacancies.total.total}`
         }
       ]},
       ... classroom.obs? [{
@@ -318,16 +318,20 @@ UI.prototype.createClassroomInfo = function(classroom) {
       {
         tag: 'table',
         class: 'classroom-info-vacancies',
-        children: [].concat({tag:'tr', innerHTML:'<th>Vagas</th><th>V</th><th>I</th><th>P</th><th>M</th>'},
+        children: [].concat({tag:'tr', innerHTML:'<th>Vagas</th>' + 
+                                                  (classroom.vacancies.total.total !== undefined ? '<th>V</th>' : '') +
+                                                  (classroom.vacancies.total.subscribed !== undefined ? '<th>I</th>' : '') +
+                                                  (classroom.vacancies.total.pending !== undefined ? '<th>P</th>': '') +
+                                                  (classroom.vacancies.total.enrolled !== undefined ? '<th>M</th>' : '')},
           ...Object.keys(classroom.vacancies).filter(x => x != "total").map(vacancyType => ([{
             tag: 'tr',
             class: 'classroom-vacancy',
-            innerHTML: `<td>${vacancyType}</td><td>${classroom.vacancies[vacancyType].total}</td><td>${classroom.vacancies[vacancyType].subscribed}</td><td>${classroom.vacancies[vacancyType].pending}</td><td>${classroom.vacancies[vacancyType].enrolled}</td>`
+            innerHTML: `<td>${vacancyType}</td>${Object.values(classroom.vacancies[vacancyType]).map(v => v instanceof Object ? '' : `<td>${v}</td>`).join('')}`
           },
           ...Object.keys(classroom.vacancies[vacancyType].groups).map(vacancyGroup => ({
               tag: 'tr',
               class: 'classroom-vacancy classroom-vacancy-group',
-              innerHTML: `<td>${vacancyGroup}</td><td>${classroom.vacancies[vacancyType].groups[vacancyGroup].total}</td><td>${classroom.vacancies[vacancyType].groups[vacancyGroup].subscribed}</td><td>${classroom.vacancies[vacancyType].groups[vacancyGroup].pending}</td><td>${classroom.vacancies[vacancyType].groups[vacancyGroup].enrolled}</td>`
+              innerHTML: `<td>${vacancyGroup}</td>${Object.values(classroom.vacancies[vacancyType].groups[vacancyGroup]).map(v => `<td>${v}</td>`).join('')}`
             }))]
           )))
       }
