@@ -1,5 +1,5 @@
 import tinycolor from 'tinycolor2';
-import Slip from 'slipjs';
+import Slip from './slip.js';
 import {createHtmlElementTree, indexOfDay, removeDuplicates} from './custom_lib.js';
 
 /**
