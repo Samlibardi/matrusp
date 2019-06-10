@@ -8,3 +8,7 @@ data/*
 db/*
 *.log
 *.lock
+web/node_modules/
+*.sln
+*.pyproj
+py/.vs/
