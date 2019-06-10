@@ -1,6 +1,5 @@
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import(/*webpackChunkName: "html2canvas"*/'html2canvas').then(module => global.html2canvas = module.default);
+import(/*webpackChunkName: "jspdf"*/'jspdf').then((module) => {global.jsPDF = module.default; import (/*webpackChunkName: "autotable"*/'jspdf-autotable')});
 import tinycolor from 'tinycolor2';
 
 function PrintBox() {

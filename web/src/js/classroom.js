@@ -42,12 +42,10 @@ export default function Classroom(jsonObj, parentLecture) {
       this.addTeachers([].concat.apply([], jsonObj.horario.map(x => x.professores)))
       this.schedules = jsonObj.horario.filter(horario => horario.inicio && horario.fim && horario.dia).map(horario => new Schedule(horario, this));
     }
-    
-    var vacancy;
 
     //Vacancy mapping
     for(var vacancyType in jsonObj.vagas) {
-      vacancy = {
+      var vacancy = {
         total: jsonObj.vagas[vacancyType].vagas,
         subscribed: jsonObj.vagas[vacancyType].inscritos,
         pending: jsonObj.vagas[vacancyType].pendentes,
@@ -110,8 +108,8 @@ Classroom.fromLinked = function(jsonT, jsonP, parentLecture) {
   }
 
   //Vacancy mapping
-  for(vacancyType in jsonT.vagas) {
-      vacancy = {
+  for(var vacancyType in jsonT.vagas) {
+      var vacancy = {
         total: jsonT.vagas[vacancyType].vagas,
         subscribed: jsonT.vagas[vacancyType].inscritos,
         pending: jsonT.vagas[vacancyType].pendentes,
@@ -119,8 +117,8 @@ Classroom.fromLinked = function(jsonT, jsonP, parentLecture) {
         groups: {}
       };
 
-      for(vacancyGroup in jsonT.vagas[vacancyType].grupos) {
-        group = jsonT.vagas[vacancyType].grupos[vacancyGroup];
+      for(var vacancyGroup in jsonT.vagas[vacancyType].grupos) {
+        var group = jsonT.vagas[vacancyType].grupos[vacancyGroup];
         vacancy.groups[vacancyGroup] = {
           total: group.vagas,
           subscribed: group.inscritos,
