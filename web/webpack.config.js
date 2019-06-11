@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
+	devtool: 'cheap-module-eval-source-map',
 	entry: {
 		dblib: './src/js/dbhelpers.js',
 		main: ['./src/js/main.js', './src/styles/sass/application.scss', './src/styles/css/icons.css', './src/styles/css/roboto.css', './src/index.html'],
@@ -80,6 +81,11 @@ module.exports = {
 		from: 'src/styles/webfonts',
 		to: './webfonts/[name].[ext]',
 		toType: 'template'
+	},
+	{
+		from: 'src/matrusp.webmanifest',
+		to: './matrusp.webmanifest',
+		toType: 'file'
 	}
 	])
 	]
