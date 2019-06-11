@@ -1,5 +1,5 @@
-import(/*webpackChunkName: "html2canvas"*/'html2canvas').then(module => global.html2canvas = module.default);
-import(/*webpackChunkName: "jspdf"*/'jspdf').then((module) => {global.jsPDF = module.default; import (/*webpackChunkName: "autotable"*/'jspdf-autotable')});
+var html2canvas = import(/*webpackChunkName: "html2canvas"*/'html2canvas').then(module => module.default);
+var jsPDF = import(/*webpackChunkName: "jspdf"*/'jspdf').then((module) => {jsPDF = module.default; import (/*webpackChunkName: "autotable"*/'jspdf-autotable'); return jsPDF;});
 import tinycolor from 'tinycolor2';
 
 function PrintBox() {
@@ -188,6 +188,8 @@ PrintBox.prototype.generatePDF = async function() {
   this.downloadButton.disabled = true;
   this.printButtonIcon.className = this.downloadButtonIcon.className = 'fas fa-spinner';
 
+  jsPDF = await jsPDF; //ensure jspdf is loaded
+
   var pdf = new jsPDF('p','in','a4');
   var timeTable = document.getElementById("time-table");
   var pageWidth = pdf.internal.pageSize.getWidth();
@@ -204,6 +206,8 @@ PrintBox.prototype.generatePDF = async function() {
       line.setAttribute('stroke-width',style.strokeWidth);
     })
   })
+
+  html2canvas = await html2canvas; //ensure html2canvas is loaded
   
   //Generate the timetable canvas
   //Window width and height are needed to get consistent timetable size in every device

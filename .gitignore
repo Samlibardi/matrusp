@@ -12,3 +12,4 @@ web/node_modules/
 *.sln
 *.pyproj
 py/.vs/
+web/package-lock.json
