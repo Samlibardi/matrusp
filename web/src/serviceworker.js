@@ -47,7 +47,7 @@ function cacheUpdateRefresh(request) {
 
     // Se o pedido for encontrado em cache, fazer um pedido para a rede e colocar em cache, mas retornar a resposta do cache
     //  antes que ele seja concluido. Enviar o ETag da resposta salva para evitar baixar conteúdo repetido.
-    var promise = fetch(request.url, {method: 'GET', headers: {'If-None-Match': response.headers.get("ETag").replace('-gzip','')}}).then(async newresponse => {
+    var promise = fetch(request.url, {method: 'GET', headers: {'If-None-Match': (response.headers.get("ETag")||'').replace('-gzip','')}}).then(async newresponse => {
       if(newresponse.ok) {
         cache = await self.caches.open(CACHE_NAME);
         cache.put(request,newresponse);
