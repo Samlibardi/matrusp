@@ -6,6 +6,8 @@ import SaveBox from './save.js';
 import PrintBox from './print.js';
 import ShareBox from './share.js';
 
+console.log("OLA 1 2");
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceworker.js');
   navigator.serviceWorker.addEventListener('message', e => {

@@ -2,6 +2,7 @@ const path = require('path');
 const glob = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
 	devtool: 'cheap-module-eval-source-map',
@@ -70,7 +71,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-	new CleanWebpackPlugin(),
+	new ManifestPlugin(),
 	new CopyPlugin([
 	{
 		from: 'src/images/',
