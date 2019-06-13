@@ -73,7 +73,7 @@ function build_event() {
   return events_statement;
 }
 
-function download_icalendar() {
+export default function download_icalendar() {
   if (state.activePlan.activeCombination == null) {
     ui.showBanner("Insira uma ou mais matérias antes exportar para um arquivo ics", 2000);
     return;

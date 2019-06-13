@@ -1,3 +1,6 @@
+import download_icalendar from './icalendar.js';
+import handleGAuthClick from './googlecalendar.js';
+
 function ShareBox() {
   this.dialog = document.getElementById('share-dialog');
 

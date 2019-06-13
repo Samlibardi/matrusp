@@ -3,6 +3,7 @@ const glob = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+var WebpackAutoInject = require('webpack-auto-inject-version');
 
 module.exports = {
 	devtool: 'cheap-module-eval-source-map',
@@ -88,6 +89,11 @@ module.exports = {
 		to: './matrusp.webmanifest',
 		toType: 'file'
 	}
-	])
+	]),
+	new WebpackAutoInject({
+		components: {
+			AutoIncreaseVersion: false
+		}
+	}),
 	]
 };

@@ -5,8 +5,10 @@ import CourseBox from './courses.js';
 import SaveBox from './save.js';
 import PrintBox from './print.js';
 import ShareBox from './share.js';
+import './file.js';
+import './contact.js';
 
-console.log("OLA 1 2");
+global.version = '[AIV]{version}[/AIV]'; //Compiler directive
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceworker.js');

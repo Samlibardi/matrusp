@@ -71,7 +71,7 @@ export default function Lecture(jsonObj, parentPlan) {
 
 Lecture.load = async function(baseLecture,parentPlan) {
   var lectureInfo = await matruspDB.lectures.get(baseLecture.code);
-  if (!lectureInfo) lectureInfo = await fetch(`db/${baseLecture.code}.json`).then(response => response.ok ? response.json() : null);
+  if (!lectureInfo) lectureInfo = await fetch(`db/${baseLecture.code}.json`).then(response => response.ok ? response.json() : null).catch(e => {});
   if (!lectureInfo) return;
 
   lectureInfo.color = baseLecture.color !== undefined ? baseLecture.color : parentPlan.colors.indexOf(Math.min(... parentPlan.colors));

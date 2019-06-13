@@ -25,7 +25,8 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.33.0",
+    "webpack": "^4.34.0",
+    "webpack-auto-inject-version": "^1.2.2",
     "webpack-cli": "^3.3.3",
     "webpack-manifest-plugin": "^2.0.4",
     "worker-loader": "^2.0.0"

@@ -1,4 +1,5 @@
 import Dexie from 'dexie';
+global.Dexie = Dexie;
 
 global.dbutil = {
   stopwords_ptBR: [

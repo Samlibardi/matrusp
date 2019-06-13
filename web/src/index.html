@@ -32,8 +32,9 @@
     <link rel="stylesheet" href="application.css">
     <link rel="stylesheet" href="roboto.css">
     <link rel="stylesheet" href="icons.css">
-    <link rel="preload" href="dbupdate.worker.js">
-    <link rel="preload" href="dbsearch.worker.js">
+    <link rel="preload" href="dbupdate.worker.js" as="script">
+    <link rel="preload" href="dbsearch.worker.js" as="script">
+
 </head>
 
 <body>
@@ -215,6 +216,7 @@
 		<div id="footer-links"><a href="http://bcc.ime.usp.br/matrusp_v1">Versão antiga</a><br/>
 			 <a href="https://github.com/matrusp/matrusp/wiki/FAQ" target="_blank">Perguntas frequentes</a><br/>
 			 <a id="contact" href="mailto:apoiobcc@linux.ime.usp.br">Contato (apoiobcc@linux.ime.usp.br)</a>
+			 <div id="version">Versão [AIV]{version}[/AIV]</div>
 		</div>
 		<div id="github-buttons">
 			<a class="github-button" href="https://github.com/matrusp" aria-label="Follow @matrusp on GitHub">@matrusp no GitHub</a>

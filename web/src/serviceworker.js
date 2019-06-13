@@ -2,14 +2,17 @@ const CACHE_NAME_STATIC = "Matrusp_static";
 const CACHE_NAME_DATA = "Matrusp_data";
 const CACHE_NAME_OLD = "Matrusp";
 
+self.importScripts('dblib.js');
+
+var swdb = new Dexie("Matrusp-sw");
+swdb.version(1).stores({dirs: ''});
+
 self.path = self.location.href.substring(0,self.location.href.lastIndexOf('/'));
 
 self.recentFetches = [];
 
-self.CURDirs = [];
-
 //Lista de diretórios que seguem o modelo Network-Cache
-self.NCDirs = [
+const NCDirs = [
   "/data/.+" //Identificadores baixados não mostrarão mensagem de atualização
 ].map(dir => new RegExp(`^${self.path}.+${dir}$`));
 
@@ -26,12 +29,12 @@ async function updateStaticCache() {
   //Obter o manifest.json, enviando a ETag para ver se houve alteração
   var oldManifestResponse = await cache.match('manifest.json');
   var manifestResponse = oldManifestResponse? 
-    await fetch('manifest.json', {method: 'GET', headers: {'If-None-Match': (oldManifestResponse.headers.get("ETag")||'').replace('-gzip','')}}) :
-    await fetch('manifest.json');
+    await fetch('manifest.json', {method: 'GET', headers: {'If-None-Match': (oldManifestResponse.headers.get("ETag")||'').replace('-gzip','')}}).catch(e => {}) :
+    await fetch('manifest.json').catch(e => {});
     
   //Se não for possível obter o manifest, ou se não tiver sido alterado, não há necessidade de alterar
   //Sempre que o webpack é compilado, o manifest é alterado, logo se houver alteração em qualquer arquivo, o manifest terá um novo ETag
-  if(!manifestResponse.ok)
+  if(!manifestResponse || !manifestResponse.ok)
     return;
 
   cache.put('manifest.json', manifestResponse.clone()); //Salvar o manifest no cache
@@ -41,7 +44,7 @@ async function updateStaticCache() {
   var manifestValues = Object.values(manifest);
   manifest = new Set(manifestValues);
 
-  self.CURDirs = manifestValues.map(dir => new RegExp(`^${self.path}/${dir.replace(/^\//,'')}$`));
+  await swdb.dirs.put(manifestValues.map(dir => new RegExp(`^${self.path}/${dir.replace(/^\//,'')}$`)),'CURDirs');
 
   var keys = await cache.keys();
 
@@ -60,7 +63,7 @@ async function updateStaticCache() {
     } else {
       //Pedir cada arquivo do cache para o serivdor, enviando a ETag para verificar modificações.
       var oldResponse = await cache.match(request);
-      var newResponse = await fetch(request.url, {method: 'GET', headers: {'If-None-Match': (oldResponse.headers.get("ETag")||'').replace('-gzip','')}});
+      var newResponse = await fetch(request.url, {method: 'GET', headers: {'If-None-Match': (oldResponse.headers.get("ETag")||'').replace('-gzip','')}}).catch(e => {});
       if(newResponse.status == 200) {
         cache.put(request, newResponse.clone());
         updatedFiles++;
@@ -85,10 +88,10 @@ self.addEventListener('fetch', e => {
     }
 
     // Responder a um fetch com uma resposta do cache(se o diretório estiver na lista)
-    if(self.CURDirs.some(dir => dir.test(e.request.url))) {
+    if((await swdb.dirs.get('CURDirs')).some(dir => dir.test(e.request.url))) {
       return await cacheUpdateRefresh(e.request.clone()); //Envia mensagem de atualização ao cliente
     }
-    else if(self.NCDirs.some(dir => dir.test(e.request.url))) {
+    else if(NCDirs.some(dir => dir.test(e.request.url))) {
       return await networkCache(e.request.clone()); //Não envia mensagem de atualização
     }
 

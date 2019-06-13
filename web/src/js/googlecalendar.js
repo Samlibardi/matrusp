@@ -28,7 +28,7 @@ function handleAuthResult(authResult) {
   }
 }
 
-function handleGAuthClick(event) {
+export default function handleGAuthClick(event) {
   if (state.plans[state.activePlanIndex].activeCombination == null) {
     alert("Insira uma ou mais matérias antes exportar para o Google Calendar");
     return;
