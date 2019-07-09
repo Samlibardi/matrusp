@@ -35,7 +35,8 @@
   "scripts": {
     "build-dev": "webpack --mode development",
     "build-dev-watch": "webpack --mode development --watch",
-    "rebuild-dev": "rmdir dist -recurse; webpack",
+    "rebuild-dev": "rimraf dist && webpack --mode development",
+	"clean": "rimraf dist",
     "build-release": "webpack --mode production"
   },
   "keywords": [],
