@@ -11,13 +11,19 @@ module.exports = {
 		dblib: './src/js/dbhelpers.js',
 		main: ['./src/js/main.js', './src/styles/sass/application.scss', './src/styles/css/icons.css', './src/styles/css/roboto.css', './src/index.html'],
 		'dbupdate.worker': './src/js/dbupdate.worker.js',
-		'dbsearch.worker': './src/js/dbsearch.worker.js',
+		'dbsearch.worker': './src/js/modules/search/dbsearch.worker.js',
 		'serviceworker': './src/serviceworker.js'
 	},
 	output: {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist'),
 		devtoolModuleFilenameTemplate: info => 'file:///' + path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+	},
+	resolve: {
+		alias: {
+			root: path.resolve(__dirname, 'src/js'),
+			Modules: path.resolve(__dirname, 'src/js/modules')
+		}
 	},
 	module: {
 		rules: [

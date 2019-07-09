@@ -1,12 +1,12 @@
 import State from './state.js';
 import UI from './ui.js';
-import SearchBox from './search.js';
-import CourseBox from './modules/courses/courses.js';
+import SearchBox from 'Modules/search/search.js';
+import CourseBox from 'Modules/courses/courses.js';
 import SaveBox from './save.js';
-import PrintBox from './modules/print/print.js';
-import ShareBox from './modules/share/share.js';
-import './file.js';
-import './contact.js';
+import PrintBox from 'Modules/print/print.js';
+import ShareBox from 'Modules/share/share.js';
+import 'Modules/upload/upload.js';
+import 'Modules/contact/contact.js';
 
 global.version = '[AIV]{version}[/AIV]'; //Compiler directive
 

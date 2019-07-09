@@ -1,4 +1,4 @@
-import {createAndAppendChild} from './custom_lib.js';
+import {createAndAppendChild} from 'root/custom_lib.js';
 
 /**
  * A class representing the Search Box

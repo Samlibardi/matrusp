@@ -44,9 +44,9 @@ function handleDrop(e) {
   }
 }
 
-document.getElementById('upload-input').addEventListener('change', function(e) { uploadFile(this.files[0]); });
+document.getElementById('upload-input').addEventListener('change', e => { uploadFile(this.files[0]); });
 var dropoverlay = document.getElementById('drop-overlay');
-document.addEventListener('dragenter', function(e) { dropoverlay.classList.add('overlay-show'); });
-dropoverlay.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation();});
+document.addEventListener('dragenter', e => { dropoverlay.classList.add('overlay-show'); });
+dropoverlay.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation();});
 dropoverlay.addEventListener('drop', handleDrop);
-dropoverlay.addEventListener('dragleave', function(e) { this.classList.remove('overlay-show'); });
+dropoverlay.addEventListener('dragleave', e => { this.classList.remove('overlay-show'); });
