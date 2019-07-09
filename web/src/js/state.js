@@ -1,5 +1,7 @@
 import Plan from './plan.js';
 
+global.matrusp_current_state_version = 7;
+
 /**
  * A singleton class representing the state.
  * 
@@ -16,6 +18,8 @@ import Plan from './plan.js';
  * @see Plan
  */
 function State() {
+  if(global.state) return global.state;
+
   this.plans = [];
   this.removedPlans = [];
 
@@ -301,4 +305,4 @@ State.prototype.copyPlan = function(plan) {
   return this.addPlan(plan.serialize());
 }
 
-export default State;
+global.state = new State();

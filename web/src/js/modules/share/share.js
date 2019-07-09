@@ -1,9 +1,13 @@
 import download_icalendar from './icalendar.js';
 import handleGAuthClick from './googlecalendar.js';
 import html from './share.html';
+import buttonHtml from './share-button.html';
 
 function ShareBox() {
   this.dialog = ui.createDialog(html);
+
+  this.headerButton = ui.addHeaderButton(buttonHtml);
+  this.headerButton.addEventListener('click', e => this.open());
 
   this.clipboardButton = document.getElementById('share-clipboard');
   this.mailButton = document.getElementById('share-mail');

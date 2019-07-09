@@ -1,14 +1,12 @@
-import State from './state.js';
-import UI from './ui.js';
+global.version = '[AIV]{version}[/AIV]'; //bundler directive
+
+import './state.js';
+import './ui.js';
 import SearchBox from 'Modules/search/search.js';
 import CourseBox from 'Modules/courses/courses.js';
 import SaveBox from './save.js';
 import PrintBox from 'Modules/print/print.js';
 import ShareBox from 'Modules/share/share.js';
-import 'Modules/upload/upload.js';
-import 'Modules/contact/contact.js';
-
-global.version = '[AIV]{version}[/AIV]'; //Compiler directive
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceworker.js');
@@ -19,10 +17,6 @@ if ('serviceWorker' in navigator) {
 
 var dbworker = new Worker("dbupdate.worker.js");
 
-global.matrusp_current_state_version = 7;
-
-global.state = new State();
-global.ui = new UI();
 global.searchBox = new SearchBox();
 global.courseBox = new CourseBox();
 global.shareBox = new ShareBox();
@@ -60,3 +54,6 @@ catch(e) {
 state.saveOnLocalStorage();
 
 setTimeout(function() { ui.scrollActiveCombinationToView() }, 100);
+
+import 'Modules/upload/upload.js';
+import 'Modules/contact/contact.js';

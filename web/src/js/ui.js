@@ -8,6 +8,8 @@ import {createHtmlElementTree, createElementWithAttributes, indexOfDay, removeDu
  * @Constructor
  */
 function UI() {
+  if(global.ui) return global.ui;
+  
   // DOM Objects Reference Variables
   // ===============================
   this.accordion = document.getElementById('accordion');
@@ -29,7 +31,7 @@ function UI() {
   this.fitButton = document.getElementById('fit-time-table-button');
   this.undoButton = document.getElementById('undo');
   this.header = document.getElementById('header');
-  this.headerIcons = document.getElementById('icons');
+  this.headerButtons = document.getElementById('header-buttons');
 
   // This comes from the SASS theme file
   //TODO: find better way to sync this
@@ -129,8 +131,8 @@ function UI() {
     }
   });
 
-  window.addEventListener('resize', e => this.header.style.top = -this.headerIcons.offsetTop + 'px');
-  this.header.style.top = -this.headerIcons.offsetTop + 'px';
+  window.addEventListener('resize', e => this.header.style.top = -this.headerButtons.offsetTop + 'px');
+  this.header.style.top = -this.headerButtons.offsetTop + 'px';
 
   document.getElementById('msg-banner-close').addEventListener('click', () => this.closeBanner());
 
@@ -1105,10 +1107,17 @@ UI.prototype.createClassroomContextMenu = function(classroom, pos) {
 }
 
 UI.prototype.createDialog = function(html) {
-  var tpl = document.createElement('template');
-  tpl.innerHTML = html;
+  if(html instanceof HTMLElement) {
+    var dialog  = html;
+  }
+  else if(typeof html == 'string') {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = html;
 
-  var dialog = tpl.content.firstChild;
+    var dialog = tpl.content.firstChild;
+  }
+  else return;
+
   dialog.addEventListener('click', e => e.stopPropagation());
 
   var closeButton = createElementWithAttributes('button', {
@@ -1138,4 +1147,21 @@ UI.prototype.closeDialog = function() {
   this.dialogOpen = null;
 }
 
-export default UI;
+UI.prototype.addHeaderButton = function(html) {
+    if(html instanceof HTMLElement) {
+    var button  = html;
+  }
+  else if(typeof html == 'string') {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = html;
+
+    var button = tpl.content.firstChild;
+  }
+  else return;
+
+  this.headerButtons.appendChild(button);
+
+  return button;
+}
+
+global.ui = new UI();

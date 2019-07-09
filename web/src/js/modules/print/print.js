@@ -1,8 +1,13 @@
 import tinycolor from 'tinycolor2';
 import html from './print.html';
+import buttonHtml from './print-button.html';
+import {createElementWithAttributes} from 'root/custom_lib.js';
 
 function PrintBox() {
   this.dialog = ui.createDialog(html);
+
+  this.headerButton = ui.addHeaderButton(buttonHtml);
+  this.headerButton.addEventListener('click', e => this.open());
 
   this.printButton = document.getElementById('print-button');
   this.printButtonIcon = document.getElementById('print-button-icon');

@@ -1,3 +1,7 @@
+import 'root/custom_lib.js';
+import buttonHtml from './upload-button.html';
+import overlayHtml from './upload-overlay.html';
+
 function uploadFile(file) {
   var reader = new FileReader();
   reader.onload = (function parseAFile(aFile) {
@@ -44,8 +48,13 @@ function handleDrop(e) {
   }
 }
 
-document.getElementById('upload-input').addEventListener('change', e => { uploadFile(this.files[0]); });
-var dropoverlay = document.getElementById('drop-overlay');
+ui.addHeaderButton(buttonHtml);
+document.getElementById('upload-input').addEventListener('change', e => { uploadFile(e.target.files[0]); });
+var tpl = document.createElement('template');
+tpl.innerHTML = overlayHtml;
+var dropoverlay = tpl.content.firstChild;
+document.body.appendChild(dropoverlay);
+
 document.addEventListener('dragenter', e => { dropoverlay.classList.add('overlay-show'); });
 dropoverlay.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation();});
 dropoverlay.addEventListener('drop', handleDrop);
