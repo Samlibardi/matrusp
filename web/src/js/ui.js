@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 import Slip from './slip.js';
-import {createHtmlElementTree, indexOfDay, removeDuplicates} from './custom_lib.js';
+import {createHtmlElementTree, createElementWithAttributes, indexOfDay, removeDuplicates} from './custom_lib.js';
 
 /**
  * Object interface to manipulate the User Interface objects
@@ -26,9 +26,6 @@ function UI() {
   this.planPaddleRight = document.getElementById('plan-paddle-right');
   this.menuOverlay = document.getElementById('menu-overlay');
   this.dialogOverlay = document.getElementById('dialog-overlay');
-  this.courseDialog = document.getElementById('course-dialog');
-  this.shareDialog = document.getElementById('share-dialog');
-  this.printDialog = document.getElementById('print-dialog');
   this.fitButton = document.getElementById('fit-time-table-button');
   this.undoButton = document.getElementById('undo');
   this.header = document.getElementById('header');
@@ -1107,30 +1104,38 @@ UI.prototype.createClassroomContextMenu = function(classroom, pos) {
   this.addContextMenu(menu, pos);
 }
 
-UI.prototype.openCourseDialog = function() {
-  this.dialogOverlay.classList.add('show');
-  this.courseDialog.classList.add('show');
-  this.openDialog = this.courseDialog;
+UI.prototype.createDialog = function(html) {
+  var tpl = document.createElement('template');
+  tpl.innerHTML = html;
+
+  var dialog = tpl.content.firstChild;
+  dialog.addEventListener('click', e => e.stopPropagation());
+
+  var closeButton = createElementWithAttributes('button', {
+    class: 'dialog-close-button',
+    type: 'button',
+    onclick: e => this.closeDialog(),
+    innerHTML: '×'
+  });
+
+  dialog.insertBefore(closeButton, dialog.firstChild);
+  this.dialogOverlay.appendChild(dialog);
+
+  return dialog;
 }
 
-UI.prototype.openShareDialog = function() {
+UI.prototype.openDialog = function(dialog) {
   this.dialogOverlay.classList.add('show');
-  this.shareDialog.classList.add('show');
-  this.openDialog = this.shareDialog;
-}
-
-UI.prototype.openPrintDialog = function() {
-  this.dialogOverlay.classList.add('show');
-  this.printDialog.classList.add('show');
-  this.openDialog = this.printDialog;
+  dialog.classList.add('show');
+  this.dialogOpen = dialog;
 }
 
 UI.prototype.closeDialog = function() {
-  if(!this.openDialog) return;
+  if(!this.dialogOpen) return;
 
   this.dialogOverlay.classList.remove('show');
-  this.openDialog.classList.remove('show');
-  this.openDialog = null;
+  this.dialogOpen.classList.remove('show');
+  this.dialogOpen = null;
 }
 
 export default UI;

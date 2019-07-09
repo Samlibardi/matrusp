@@ -1,10 +1,10 @@
 import State from './state.js';
 import UI from './ui.js';
 import SearchBox from './search.js';
-import CourseBox from './courses.js';
+import CourseBox from './modules/courses/courses.js';
 import SaveBox from './save.js';
-import PrintBox from './print.js';
-import ShareBox from './share.js';
+import PrintBox from './modules/print/print.js';
+import ShareBox from './modules/share/share.js';
 import './file.js';
 import './contact.js';
 

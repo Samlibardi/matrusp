@@ -22,7 +22,7 @@
     }
 }
 
-.dialog {
+matrusp-dialog {
     display: none;
     flex: 0 0 420px;
 
@@ -43,7 +43,7 @@
         display: block;
     }
 
-    & button.close-button {
+    & button.dialog-close-button {
         position: absolute;
         right: 0;
         top: 0;
@@ -52,6 +52,7 @@
         font-size: 16pt;
         color: #888;
         font-weight: lighter;
+        min-width: 0;
         width: 24px;
         height: 24px;
         padding: 0;

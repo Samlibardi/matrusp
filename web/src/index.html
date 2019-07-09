@@ -42,45 +42,7 @@
 		<span>Solte o arquivo para carregar</span>
     </div>
     <div id="menu-overlay"></div>
-	<div id="dialog-overlay" onclick="ui.closeDialog()">
-		<div id="print-dialog" class="dialog" onclick="event.stopPropagation()">
-			<button type="button" class="close-button" id="course-window-close" onclick="ui.closeDialog()">×</button>
-			<label id="print-format-label"><div>Formato</div>
-			<select id="print-format"><option>A4</option></select></label>
-			<label id="print-color-label"><div>Cor</div>
-			<select id="print-color"><option value="color">Colorido</option><option value="eco-color">Colorido (econômico)</option><option value="grayscale">Escala de cinza</option></select></label>
-			<div id="print-buttons">
-			<button type="button" id="download-pdf-button"><div id="download-pdf-button-icon" class="fas fa-download"></div> Salvar PDF</button>
-			<button class="emphasis" id="print-button"><div id="print-button-icon" class="fas fa-print"></div> Imprimir</button>
-			</div>
-		</div>
-		<form id="course-dialog" class="dialog" onclick="event.stopPropagation()">
-			<button type="button" class="close-button" id="course-window-close" onclick="ui.closeDialog()">×</button>
-			<label id="course-campus-select-label" class="select-label"><div>Campus</div>
-			<select name="campus" id="course-campus-select"></select></label>
-			<label id="course-unit-select-label" class="select-label"><div>Unidade</div>
-			<select name="unit" id="course-unit-select"></select></label>
-			<label id="course-select-label" class="select-label"><select name="course" id="course-select" disabled></select>
-			<div>Curso</div></label>
-			<label id="course-period-select-label" class="select-label"><select name="period" id="course-period-select" disabled></select>
-			<div>Período</div></label>
-			<div id="course-lecture-list"></div>
-			<label id="course-optative-check-label"><input id="course-optative-check" type="checkbox" name="optativas" checked>Incluir optativas</label>
-			<button type="button" id="course-accept-button">Aceitar</button>
-		</form>
-		<div id="share-dialog" class="dialog" onclick="event.stopPropagation()">
-			<button type="button" class="close-button" id="share-dialog-close" onclick="ui.closeDialog()">×</button>
-			<label><div>Seu link para compartilhar</div>
-			<div id="share-link-wrapper">
-			<input id="share-link" type="text" onfocus="this.select()" readonly value="https://bcc.ime.usp.br/matrusp/#identifier"/></label><button id="share-clipboard" class="far fa-clone"></button></div>
-			<div><button id="share-mail" class="fas fa-envelope"></button><button id="share-facebook" class="fab fa-facebook"></button><button id="share-whatsapp" class="fab fa-whatsapp"></button></div>
-			<div id="share-calendar">
-			<button id="share-gcal"><span class="fas fa-calendar-alt"></span> Enviar para Google Calendar</button><br/>
-			<button id="share-ics"><span class="fas fa-calendar-alt"></span> Exportar para calendário .ics</button><br />
-			<button id="share-download"><span class="fas fa-download"></span> Baixar grade</button>
-			</div>
-		</div>
-	</div>
+	<div id="dialog-overlay" onclick="ui.closeDialog()"></div>
     <div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];

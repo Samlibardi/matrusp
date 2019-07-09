@@ -1,4 +1,5 @@
-import {createAndAppendChild} from './custom_lib.js';
+import {createAndAppendChild} from '../../custom_lib.js';
+import html from './courses.html';
 
 /**
  * A class representing the course selection box
@@ -7,7 +8,7 @@ import {createAndAppendChild} from './custom_lib.js';
  */
 export default function CourseBox() {
   //Element declarations
-  this.dialog = document.getElementById('course-dialog');
+  this.dialog = ui.createDialog(html);
   this.closeButton = document.getElementById('course-window-close');
   this.campusSelect = document.getElementById('course-campus-select');
   this.unitSelect = document.getElementById('course-unit-select');
@@ -84,7 +85,7 @@ CourseBox.prototype.open = function() {
   if(!this.campusSelect.value)
     //Populate the course box
     this.populateCampusSelect().then(() => this.campusChanged()); 
-    ui.openCourseDialog();
+    ui.openDialog(this.dialog);
 }
 
 /**

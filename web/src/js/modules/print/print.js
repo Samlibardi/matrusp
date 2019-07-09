@@ -1,6 +1,9 @@
 import tinycolor from 'tinycolor2';
+import html from './print.html';
 
 function PrintBox() {
+  this.dialog = ui.createDialog(html);
+
   this.printButton = document.getElementById('print-button');
   this.printButtonIcon = document.getElementById('print-button-icon');
   this.downloadButton = document.getElementById('download-pdf-button');  
@@ -41,7 +44,7 @@ PrintBox.prototype.open = function() {
     return;
   }
   
-  ui.openPrintDialog()
+  ui.openDialog(this.dialog);
   this.updateOptions();
 }
 

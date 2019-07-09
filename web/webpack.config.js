@@ -22,7 +22,7 @@ module.exports = {
 	module: {
 		rules: [
 		{
-			test: /\.html$/,
+			test: /index\.html$/,
 			use:{
 				loader:'file-loader',
 				options: {
@@ -30,6 +30,11 @@ module.exports = {
 				}
 			} 
 			
+		},
+		{
+			test:/\.html/,
+			exclude:/index\.html$/,
+			use: 'html-loader'
 		},
 		{
 			test: /\.scss$/,

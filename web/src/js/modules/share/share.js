@@ -1,8 +1,9 @@
 import download_icalendar from './icalendar.js';
 import handleGAuthClick from './googlecalendar.js';
+import html from './share.html';
 
 function ShareBox() {
-  this.dialog = document.getElementById('share-dialog');
+  this.dialog = ui.createDialog(html);
 
   this.clipboardButton = document.getElementById('share-clipboard');
   this.mailButton = document.getElementById('share-mail');
@@ -20,7 +21,7 @@ function ShareBox() {
 }
 
 ShareBox.prototype.open = function() {
-  ui.openShareDialog();
+  ui.openDialog(this.dialog);
 
   var params = new URLSearchParams();
   if(state.identifier)
