@@ -51,6 +51,39 @@
     "type": "image/png"
   },
   {
+    "src": "images/matrusp64.png",
+    "sizes": "64x64",
+    "type": "image/png"
+  },
+  {
+    "src": "images/matrusp128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  },
+  {
+    "src": "images/matrusp256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  },
+  {
+    "purpose": "any",
+    "src": "images/matrusp320.png",
+    "sizes": "320x320",
+    "type": "image/png"
+  },
+  {
+    "purpose": "any",
+    "src": "images/matrusp512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  },
+  {
+    "purpose": "any",
+    "src": "images/matrusp1024.png",
+    "sizes": "1024x1024",
+    "type": "image/png"
+  },
+  {
     "purpose": "maskable",
     "src": "images/maskable48.png",
     "sizes": "48x48",
@@ -78,6 +111,42 @@
     "purpose": "maskable",
     "src": "images/maskable240.png",
     "sizes": "240x240",
+    "type": "image/png"
+  },
+  {
+    "purpose": "maskable",
+    "src": "images/maskable64.png",
+    "sizes": "64x64",
+    "type": "image/png"
+  },
+  {
+    "purpose": "maskable",
+    "src": "images/maskable128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  },
+  {
+    "purpose": "maskable",
+    "src": "images/maskable256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  },
+  {
+    "purpose": "maskable",
+    "src": "images/maskable320.png",
+    "sizes": "320x320",
+    "type": "image/png"
+  },
+  {
+    "purpose": "maskable",
+    "src": "images/maskable512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  },
+  {
+    "purpose": "maskable",
+    "src": "images/maskable1024.png",
+    "sizes": "1024x1024",
     "type": "image/png"
   }]
 }
